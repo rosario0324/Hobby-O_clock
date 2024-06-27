@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+</head>
+<body>
+    <h1>{{ second_name }}적 취미</h1>
+    <ul>
+        {% for target, prediction in predictions.items() %}
+            <li>{{ target }}: {{ prediction }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Input</a>
+</body>
+</html>
+
+

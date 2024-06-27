@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feature Input</title>
+    <style>
+        .container {
+            display: flex;
+        }
+        .form-container {
+            flex: 1;
+        }
+        .list-container {
+            flex: 1;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>취미취미 콕콕bot</h1>
+    <form action="/predict" method="post">
+        <label for="first_name">성:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+
+        <label for="second_name">이름:</label>
+        <input type="text" id="second_name" name="second_name" required><br><br>
+
+                {% for feature, description in features %}
+                    <label for="{{ feature }}">{{ description }}</label>
+                    {% if feature in options %}
+                        <select id="{{ feature }}" name="{{ feature }}" required>
+                            {% for option in options[feature] %}
+                                <option value="{{ loop.index }}">{{ option }}</option>
+                            {% endfor %}
+                        </select><br><br>
+                    {% elif feature in activity_options %}
+                        <select id="{{ feature }}" name="{{ feature }}" required>
+                            {% for option in activity_options %}
+                                <option value="{{ loop.index }}">{{ option }}</option>
+                            {% endfor %}
+                        </select><br><br>
+                    {% else %}
+                        <input type="text" id="{{ feature }}" name="{{ feature }}" required><br><br>
+                    {% endif %}
+                {% endfor %}
+                <input type="submit" value="Predict">
+            </form>
+        </div>
+        <div class="list-container">
+            <h2><콕콕 list></h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>활동</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for idx, activity in activity_list %}
+                        <tr>
+                            <td>{{ idx }}</td>
+                            <td>{{ activity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
